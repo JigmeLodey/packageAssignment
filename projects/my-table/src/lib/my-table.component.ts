@@ -15,6 +15,7 @@ export class MyTableComponent implements OnInit, AfterViewInit {
   @ViewChild(MatSort) sort: MatSort | any;
   @ViewChild(MatPaginator) paginator: MatPaginator | any;
   searchKey: string | any;
+  filterChecker: any;
   appliedFilters: any = {};
   data: MatTableDataSource<any> | any;
 
@@ -96,5 +97,20 @@ export class MyTableComponent implements OnInit, AfterViewInit {
       allApplied = allApplied && data[key] === this.appliedFilters[key];
     }
     return allApplied;
+  }
+    hideShowFilter(): void {
+    this.filterChecker = !this.filterChecker;
+    localStorage.setItem('filterChecker', JSON.stringify(this.filterChecker));
+  }
+
+  filterSet(): void {
+    if (localStorage.getItem('filterChecker')) {
+      this.filterChecker = localStorage.getItem('filterChecker');
+      if (this.filterChecker === 'false') {
+        this.filterChecker = false;
+      }
+    } else {
+      this.filterChecker = true;
+    }
   }
 }

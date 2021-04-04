@@ -1,0 +1,13 @@
+{
+  "posts": [
+    {"id": 1, "name": "Lodey", "email": "somebody@mr.com", "gender": "female", "age": 13, "role": "admin"},
+    {"id": 2, "name": "Pema", "email": "testing@mr.com", "gender": "male", "age": 12, 	"role": "guest"},
+    {"id": 3, "name": "Karma", "email": "hello@mr.com", "gender": "male", "age": 5, "role": "admin"},
+    {"id": 4, "name": "Lodey", "email": "bye@mr.com", "gender": "male", "age": 13, "role": "guest"},
+    {"id": 5, "name": "Pema", "email": "someonehere@mr.com", "gender": "male", "age": 12, "role": "admin"},
+    {"id": 6, "name": "Karma", "email": "somebody@mr.com", "gender": "male", "age": 5, "role": "guest"},
+    {"id": 7, "name": "Lodey", "email": "somebody@mr.com", "gender": "male", "age": 13, "role": "member"},
+    {"id": 8, "name": "Pema", "email": "somebody@mr.com", "gender": "female", "age": 12, "role": "admin"},
+    {"id": 9, "name": "Karma", "email": "somebody@mr.com", "gender": "male", "age": 5, "role":"member"}
+  ]
+}

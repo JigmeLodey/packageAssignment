@@ -27,30 +27,30 @@ export class MyTableComponent implements OnInit, AfterViewInit {
 
   }
 
+  ngOnInit(): void {
+    this.addData();
+  }
+
+
   get fields(): any {
     return this.headerName.map((conf: any) => conf.field);
   }
 
-  ngOnInit(): void {
-    // this.data = new MatTableDataSource(this.dataSource);
-    this.addData();
-  }
-
-  addData(): void{
+  addData(): void {
     this.data = new MatTableDataSource<any>(this.dataSource);
     this.data.paginator = this.paginator;
   }
 
-  isEmpty(obj: any): any{
+  checkEmpty(obj: any): any {
     return Object.keys(obj).length === 0;
   }
 
-  resetToFiltered(): void{
-    if(!this.isEmpty(this.appliedFilters)){
+  resetToFiltered(): void {
+    if (!this.checkEmpty(this.appliedFilters)) {
       for (const key in this.appliedFilters) {
         this.applyFilter(key, this.appliedFilters[key]);
       }
-    }else{
+    } else {
       this.addData();
     }
   }
@@ -58,15 +58,15 @@ export class MyTableComponent implements OnInit, AfterViewInit {
   search(): void {
     this.data.filterPredicate = (data: any) => {
       return this.searchPredicate(data);
-    }
-    if(this.searchKey !== ''){
+    };
+    if (this.searchKey !== '') {
       this.data.filter = this.searchKey;
-    }else{
+    } else {
       this.resetToFiltered();
     }
   }
 
-  applyFilter(field: any, value: any ): void {
+  applyFilter(field: any, value: any): void {
     value = value.trim();
     if (value === 'none') {
       delete this.appliedFilters[field];
@@ -82,8 +82,8 @@ export class MyTableComponent implements OnInit, AfterViewInit {
 
   searchPredicate(data: any): boolean {
     let found = false;
-    for(let i = 0; i < this.headerName.length; i++){
-      if (this.headerName[i].searchable){
+    for (let i = 0; i < this.headerName.length; i++) {
+      if (this.headerName[i].searchable) {
         found = found || (new RegExp(this.searchKey.toLowerCase())).test(data[this.headerName[i].field].toLowerCase());
       }
     }

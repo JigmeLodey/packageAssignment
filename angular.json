@@ -3,5 +3,166 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-  }
+    "my-table": {
+      "projectType": "library",
+      "root": "projects/my-table",
+      "sourceRoot": "projects/my-table/src",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "options": {
+            "tsConfig": "projects/my-table/tsconfig.lib.json",
+            "project": "projects/my-table/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/my-table/tsconfig.lib.prod.json"
+            }
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/my-table/src/test.ts",
+            "tsConfig": "projects/my-table/tsconfig.spec.json",
+            "karmaConfig": "projects/my-table/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/my-table/tsconfig.lib.json",
+              "projects/my-table/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    },
+    "table-tester": {
+      "projectType": "application",
+      "schematics": {
+        "@schematics/angular:component": {
+          "style": "scss"
+        }
+      },
+      "root": "projects/table-tester",
+      "sourceRoot": "projects/table-tester/src",
+      "prefix": "app",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/table-tester",
+            "index": "projects/table-tester/src/index.html",
+            "main": "projects/table-tester/src/main.ts",
+            "polyfills": "projects/table-tester/src/polyfills.ts",
+            "tsConfig": "projects/table-tester/tsconfig.app.json",
+            "aot": true,
+            "assets": [
+              "projects/table-tester/src/favicon.ico",
+              "projects/table-tester/src/assets"
+            ],
+            "styles": [
+              "projects/table-tester/src/styles.scss"
+            ],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "projects/table-tester/src/environments/environment.ts",
+                  "with": "projects/table-tester/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "namedChunks": false,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb",
+                  "maximumError": "10kb"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "table-tester:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "table-tester:build:production"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "table-tester:build"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/table-tester/src/test.ts",
+            "polyfills": "projects/table-tester/src/polyfills.ts",
+            "tsConfig": "projects/table-tester/tsconfig.spec.json",
+            "karmaConfig": "projects/table-tester/karma.conf.js",
+            "assets": [
+              "projects/table-tester/src/favicon.ico",
+              "projects/table-tester/src/assets"
+            ],
+            "styles": [
+              "projects/table-tester/src/styles.scss"
+            ],
+            "scripts": []
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/table-tester/tsconfig.app.json",
+              "projects/table-tester/tsconfig.spec.json",
+              "projects/table-tester/e2e/tsconfig.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        },
+        "e2e": {
+          "builder": "@angular-devkit/build-angular:protractor",
+          "options": {
+            "protractorConfig": "projects/table-tester/e2e/protractor.conf.js",
+            "devServerTarget": "table-tester:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "table-tester:serve:production"
+            }
+          }
+        }
+      }
+    }
+  },
+  "defaultProject": "my-table"
 }

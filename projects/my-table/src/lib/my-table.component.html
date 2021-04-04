@@ -5,7 +5,7 @@
        <select (change)="applyFilter(filter.field, selected.value)" #selected class="form-select">
          <option value="none">{{filter.header}}</option>
          <option *ngFor="let options of filter.filterable" [value]="options.val" >
-           {{options.as}}
+           {{options.display}}
          </option>
        </select>
      </ng-container>
